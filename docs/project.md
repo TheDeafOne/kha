@@ -61,6 +61,7 @@ Not currently in scope: general conversation, arbitrary Mandarin transcription, 
 | Node Wi-Fi | Reported connected during manual setup; no quantitative coverage log committed |
 | Node-to-Pi test | Source code prepared; physical results not yet recorded |
 | Pi receiver | Automated loopback integration test passes |
+| Microphone health check | Local RMS/peak-to-peak sketch supplied; physical capture not yet confirmed |
 | Firmware compilation | Not verified in the preparation environment; toolchain download failed |
 | Audio streaming | Planned; not implemented |
 | Mandarin / whistle recognition | Planned; not implemented |

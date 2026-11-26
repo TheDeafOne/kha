@@ -10,6 +10,7 @@ The immediate goal is to establish reliable Wi-Fi and node-to-Pi communication b
 - [Architecture](docs/architecture.md): audio/event paths, networking, recognition, and multiple rooms.
 - [Hardware](docs/hardware.md): components, assembly, power, and placement.
 - [Implementation stages and validation](docs/implementation.md): staged work, acceptance checks, and latency measurement.
+- [Section 3A: microphone test](docs/microphone-test.md): capture raw sound and inspect levels before Wi-Fi audio streaming.
 - [Decisions and research](docs/decisions.md): selected starting points, alternatives, caveats, and primary sources.
 
 **Current milestone:** Wi-Fi connectivity has been reported working on the end nodes. Node-to-Pi round-trip testing is the next step; no physical audio or recognition results are recorded yet.
@@ -20,7 +21,7 @@ The immediate goal is to establish reliable Wi-Fi and node-to-Pi communication b
 | --- | --- | --- |
 | 1. Node Wi-Fi | `firmware/wifi_test` | Node gets an IP and stays connected at its intended location |
 | 2. Node-to-Pi communication | `firmware/node_link_test` and `pi/udp_echo.py` | Matching replies, stable round-trip time, few missed/late responses |
-| 3. Microphone capture and streaming | Planned | Clear audio arrives without gaps; measure packet loss and buffering |
+| 3. Microphone capture and streaming | Local level test in `firmware/mic_test`; streaming planned | Verify sound capture, then clear transported audio with measured gaps/buffering |
 | 4. Mandarin and whistle recognition | Planned | Accurate triggers in realistic room noise, with measured delay |
 | 5. Kasa device control | Planned | Explicit on/off commands operate a test lamp |
 | 6. Multiple rooms | Planned | Unique node IDs, duplicate suppression, room routing, recovery after disconnections |
