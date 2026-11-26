@@ -1,0 +1,9 @@
+**/secrets.h
+.env
+.venv/
+__pycache__/
+*.pyc
+build/
+*.wav
+*.pcm
+.DS_Store
