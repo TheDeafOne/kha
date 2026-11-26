@@ -22,7 +22,9 @@ Repeat after a node power cycle and a brief receiver restart. A DHCP reservation
 
 ## Section 3 — Audio acquisition and transport
 
-**Section 3A code:** `firmware/mic_test/mic_test.ino`. Follow the [microphone test guide](microphone-test.md) to compare signal levels in silence versus speech/whistling. Streaming and listening tests below are Section 3B and are not implemented yet.
+**Section 3A code:** `firmware/mic_test/mic_test.ino`. Follow the [microphone test guide](microphone-test.md) to compare signal levels in silence versus speech/whistling. Reported working during manual setup.
+
+**Section 3B code:** `firmware/audio_stream/audio_stream.ino` and `pi/record_audio.py`. Follow the [streaming/recording guide](audio-streaming.md). Receiver logic passes automated tests; physical streaming results are pending.
 
 First validate the microphone alone: capture a short explicitly enabled sample, confirm sample rate/channel/format, and listen for clipping, noise, or missing samples. Verify microphone hardware against board revision.
 

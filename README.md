@@ -11,9 +11,10 @@ The immediate goal is to establish reliable Wi-Fi and node-to-Pi communication b
 - [Hardware](docs/hardware.md): components, assembly, power, and placement.
 - [Implementation stages and validation](docs/implementation.md): staged work, acceptance checks, and latency measurement.
 - [Section 3A: microphone test](docs/microphone-test.md): capture raw sound and inspect levels before Wi-Fi audio streaming.
+- [Section 3B: audio streaming](docs/audio-streaming.md): send microphone audio to the Pi, record a short WAV, and inspect delivery/quality.
 - [Decisions and research](docs/decisions.md): selected starting points, alternatives, caveats, and primary sources.
 
-**Current milestone:** Wi-Fi connectivity has been reported working on the end nodes. Node-to-Pi round-trip testing is the next step; no physical audio or recognition results are recorded yet.
+**Current milestone:** Wi-Fi and the local microphone health check have been reported working. The audio streamer and Pi recorder are ready for a physical trial; recognition is not implemented. Quantitative node-to-Pi round-trip results have not been recorded here.
 
 ## Build sections
 
@@ -21,12 +22,12 @@ The immediate goal is to establish reliable Wi-Fi and node-to-Pi communication b
 | --- | --- | --- |
 | 1. Node Wi-Fi | `firmware/wifi_test` | Node gets an IP and stays connected at its intended location |
 | 2. Node-to-Pi communication | `firmware/node_link_test` and `pi/udp_echo.py` | Matching replies, stable round-trip time, few missed/late responses |
-| 3. Microphone capture and streaming | Local level test in `firmware/mic_test`; streaming planned | Verify sound capture, then clear transported audio with measured gaps/buffering |
+| 3. Microphone capture and streaming | `firmware/mic_test`, `firmware/audio_stream`, `pi/record_audio.py` | Verify sound capture, then clear transported audio with measured gaps/buffering |
 | 4. Mandarin and whistle recognition | Planned | Accurate triggers in realistic room noise, with measured delay |
 | 5. Kasa device control | Planned | Explicit on/off commands operate a test lamp |
 | 6. Multiple rooms | Planned | Unique node IDs, duplicate suppression, room routing, recovery after disconnections |
 
-Recognition, audio streaming, BLE transport, and Kasa control are **not implemented** in this initial version. Central recognition versus on-node ESP-SR remains a choice to benchmark.
+Recognition, BLE transport, and Kasa control are **not implemented**. Raw audio streaming and bounded WAV recording are supplied for testing. Central recognition versus on-node ESP-SR remains a choice to benchmark.
 
 ## Hardware
 
@@ -132,7 +133,7 @@ Run the receiver integration test on any computer with Python 3:
 python3 -m unittest discover -s tests -v
 ```
 
-It exercises actual UDP sockets, multiple simulated node endpoints, binary and empty packets, oversized-packet rejection, and recovery after rejection. It cannot validate the ESP32 radio, physical audio, or Pi/room performance. Firmware compilation and physical hardware testing must be reported separately from Python checks.
+The suite exercises actual UDP sockets, multiple simulated node endpoints, binary and empty echo packets, oversized-packet rejection, sequenced audio gaps/reordering/duplicates, session isolation, WAV output, timeout handling, and overwrite protection. It cannot validate the ESP32 radio, physical audio, or Pi/room performance. Firmware compilation and physical hardware testing must be reported separately from Python checks.
 
 ## Next implementation choices
 

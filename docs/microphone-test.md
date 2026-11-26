@@ -43,7 +43,7 @@ For a graph, close Serial Monitor and open **Tools → Serial Plotter**, also at
 
 ## Pass and next step
 
-Pass when repeated sound/silence tests produce sensible corresponding level changes. Then implement Section 3B: send raw audio to the Pi, save a short opt-in WAV, and listen for intelligibility, clipping, and gaps. Neither Wi-Fi streaming nor recognition is included in this sketch.
+Pass when repeated sound/silence tests produce sensible corresponding level changes. Then follow [Section 3B](audio-streaming.md): send raw audio to the Pi, save a short opt-in WAV, and listen for intelligibility, clipping, and gaps. Neither Wi-Fi streaming nor recognition is included in this microphone-only sketch.
 
 **Validation:** the API signature was checked against Espressif's Arduino ESP32 3.3.12 header and the wiring against Seeed's 3.x example. Firmware compilation and physical microphone behavior have not been verified in the preparation environment.
 

@@ -41,7 +41,7 @@ Whisper and an LLM are not required for a small fixed command vocabulary. Home A
 
 ## Audio and transport decisions
 
-- Small packets and bounded buffers are proposed to reduce avoidable delay. They are not implemented yet.
+- Section 3B implements small audio packets and a fixed-size diagnostic recording buffer. A live jitter buffer and detector integration are still planned; physical latency is unmeasured.
 - Keep raw microphone data available for the whistle detector. Speech enhancement can alter non-speech sounds; its effect must be tested.
 - [ESP32-S3 Wi-Fi power-saving documentation](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-guides/wifi-driver/wifi-performance-and-power-save.html) explains the latency/power tradeoff. Initial sketches disable Wi-Fi sleep; this is not a complete interference or jitter solution.
 - [ESP32-S3 Bluetooth documentation](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-guides/ble/overview.html) confirms BLE-only support, without Bluetooth Classic. BLE command events are plausible; audio-over-Bluetooth is not provided here.

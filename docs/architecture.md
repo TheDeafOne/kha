@@ -4,7 +4,7 @@
 
 Each XIAO joins the home's 2.4 GHz Wi-Fi. The router connects it to the Pi, preferably over Ethernet on the Pi side. Nodes need power and Wi-Fi coverage, not a USB data cable back to the hub.
 
-The connectivity code currently sends text probes only. The planned audio path is:
+The connectivity test sends text probes; the separate Section 3B firmware now streams raw audio to a bounded WAV recorder. Recognition and actions below remain planned. The intended full path is:
 
 1. Capture microphone samples on the node.
 2. Send small, sequenced audio packets across the LAN.
@@ -35,9 +35,9 @@ Wi-Fi disconnections and local send failures are logged separately. The missed/l
 
 ## Planned audio transport
 
-Initial candidate settings: 16 kHz, mono, signed 16-bit PCM, with roughly 20 ms packets. These settings are **proposed**, not implemented or benchmarked. Uncompressed payload at these settings is 32,000 bytes/second per node before headers; three nodes produce 96,000 bytes/second before overhead. Bandwidth alone is not proof of reliable low-latency delivery.
+The Section 3B test implements 16 kHz, mono, signed 16-bit PCM in 20 ms packets. These settings have not been benchmarked on the physical network. Uncompressed payload at these settings is 32,000 bytes/second per node before headers; three nodes produce 96,000 bytes/second before overhead. Bandwidth alone is not proof of reliable low-latency delivery. See the [audio protocol and test guide](audio-streaming.md) for the implemented packet format and limits.
 
-Audio packets should carry a protocol version, node identity, boot/session ID, sample sequence, and capture/sample timing information. The receiver should track gaps and drop stale audio instead of allowing an ever-growing queue. Define how a detector is reset or fed gap markers before using UDP audio in production.
+Audio packets carry a version/magic, numeric node identity, boot/capture session, sequence, sample rate, and raw PCM. Capture timestamps and a live jitter buffer are not implemented. The recording receiver uses fixed-size storage and fills missing sample slots with silence; this is not yet a live detector gap policy. Define detector resets/gap markers and stale-audio handling before using UDP audio in production.
 
 The microphone hardware must be checked against the actual board revision. Seeed documents different microphone interfaces across revisions; verify the board and current vendor examples instead of assuming every Sense variant uses the same pins/API.
 
